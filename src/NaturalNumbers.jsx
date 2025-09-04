@@ -1,19 +1,40 @@
-import React from 'react';
+import React, { useState } from "react";
+import "./index.css";
 
 function NaturalNumbers() {
-  const numbers = [];
-  for (let i = 1; i <= 10; i++) {
-    numbers.push(i);
+  const [num, setNum] = useState("");   // input number
+  const [numbers, setNumbers] = useState([]); // list of natural numbers
+
+  // Function to generate natural numbers up to num
+  function nat() {
+    const arr = [];
+    for (let i = 1; i <= num; i++) {
+      arr.push(i);
+    }
+    setNumbers(arr);
   }
 
   return (
-    <div>
-      <h2>Natural Numbers:</h2>
-        {numbers.map((number) => (
-         <h1>{number}</h1>
+    <div className="box">
+      <h3>Natural Numbers</h3>
+      <label htmlFor="nmb">Number: </label>
+      <input
+        id="nmb"
+        type="number"
+        value={num}
+        onChange={(e) => setNum(e.target.value)}
+      />
+      <button className="btn" onClick={nat}>
+        Execute
+      </button>
+
+      <div>
+        {numbers.map((number, index) => (
+          <h1 key={index}>{number}</h1>
         ))}
+      </div>
     </div>
   );
 }
 
-export default NaturalNumbers
+export default NaturalNumbers;
